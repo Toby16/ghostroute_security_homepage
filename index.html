@@ -381,6 +381,28 @@ img{max-width:100%;display:block;}
   .trust-grid{grid-template-columns:1fr;}
   .hiw{flex-direction:column;gap:16px;}
   .hiw-step{padding-right:0;}
+
+  /* Long CTA buttons (e.g. "Check Out Petro . Find The Nearest Filling
+     Station") use white-space:nowrap, and grid items don't shrink below
+     their content's natural width by default. That was stretching
+     .tool-copy/.tool-visual past the viewport edge, so section
+     backgrounds didn't fully wrap their content on mobile. Letting grid
+     items shrink and letting button text wrap fixes it. */
+  .tool-copy, .tool-visual{min-width:0;}
+  .tool-actions .btn{white-space:normal;text-align:center;}
+}
+
+/* On very narrow phones (~360px and below) the brand mark, theme toggle,
+   and "Get Started" button were slightly wider than the available nav
+   space and pushed past the screen edge. Tightening the nav's own
+   spacing (not touching anything else) keeps it on one line and inside
+   the viewport. */
+@media (max-width:400px){
+  .nav-inner{padding:14px 16px;gap:8px;}
+  .nav-brand{font-size:16px;gap:6px;}
+  .nav-brand img{width:28px;height:28px;}
+  .nav-cta{gap:6px;}
+  .nav-cta .btn-primary{padding:9px 14px;font-size:12px;}
 }
 </style>
 </head>
@@ -462,7 +484,6 @@ img{max-width:100%;display:block;}
       </div>
     </div>
 
-<link rel="icon" href="data:,">
     <div class="tool-visual reveal">
       <div class="mock">
         <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-title">scanoracle · result</span></div>
