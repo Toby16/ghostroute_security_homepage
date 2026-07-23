@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="https://res.cloudinary.com/dtitx4alw/image/upload/v1781535548/trqy7zm3d4n9dsvkkpzq.svg">
 <title>Ghostroute — Ultra-Powerful mini-apps. For Power Users. One account.</title>
-<meta name="description" content="Ghostroute is a family of everyday tools: find hotels nearby, test your internet speed, find fuel near you, lookup ip addresses, find care, find restaurants, find a mechanic. Your first search on every tool is free." />
+<meta name="description" content="Ghostroute is a family of everyday tools: find hotels & restaurants, fuel, groceries, care, or a mechanic near you, plus check any IP address and test your real internet speed. Your first search on every tool is free. Payments secured by Paystack." />
 <meta name="theme-color" content="#14131C" id="themeColorMeta" />
 <script>
   (function(){
@@ -37,6 +37,7 @@
 
   --bolt-amber:#FFC93C;
   --bolt-amber-deep:#B8860A;
+  --bolt-black:black;
 
   --petro-orange:#FF7A1A;
   --petro-orange-deep:#C24E00;
@@ -46,6 +47,16 @@
 
   --mech-rust:#E8491D;
   --mech-rust-deep:#A62F0C;
+
+  --stay-teal:#2DD4BF;
+  --stay-teal-deep:#0F766E;
+
+  --cart-green:#4ADE80;
+  --cart-green-deep:#15803D;
+  --cart-white:white;
+  --cart-darkgreen:darkgreen;
+
+  --paystack-blue:#00C3F7;
 
   --radius-lg:26px;
   --radius-md:18px;
@@ -85,6 +96,7 @@ a{color:inherit;}
 img{max-width:100%;display:block;}
 
 .wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
+.section-head{max-width:640px;margin:0 auto 40px;text-align:center;}
 
 /* ── STICKER / CARD PRIMITIVE ─────────────────────── */
 .sticker{
@@ -111,6 +123,16 @@ img{max-width:100%;display:block;}
 .btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink);}
 .btn-primary{background:var(--gr-purple);color:#fff;}
 .btn-ghost{background:transparent;}
+.btn-sm{padding:10px 20px;font-size:13px;box-shadow:3px 3px 0 var(--ink);}
+
+.link-arrow{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13.5px;
+  text-decoration:none;color:var(--ink-soft);
+  border-bottom:2px solid transparent;
+  transition:color .15s ease, border-color .15s ease;
+}
+.link-arrow:hover{color:var(--ink);border-color:var(--ink);}
 
 .pill{
   display:inline-flex;align-items:center;gap:7px;
@@ -163,16 +185,56 @@ img{max-width:100%;display:block;}
 @media (max-width:760px){.nav-links{display:none;}}
 
 /* ── HERO ──────────────────────────────────────────── */
-.hero{position:relative;padding:64px 24px 80px;overflow:hidden;}
-.hero-inner{max-width:900px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center;}
+.hero{position:relative;padding:64px 24px 56px;overflow:hidden;}
+.hero-inner{max-width:900px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center;position:relative;}
 
+/* minimal 3D layer: perspective wrapper + floating chip stickers around the mascot */
+.hero-3d{
+  position:relative;width:100%;max-width:640px;height:220px;
+  display:flex;align-items:center;justify-content:center;
+  perspective:900px;
+  margin-bottom:6px;
+}
 .hero-ghost{
-  width:88px;height:88px;
-  margin-bottom:22px;
+  width:88px;height:88px;position:relative;z-index:3;
+  transform-style:preserve-3d;
   animation:bob 3.4s ease-in-out infinite;
 }
 .hero-ghost img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(4px 4px 0 var(--ink));border-radius:20px;}
 @keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-10px) rotate(2deg);}}
+
+.float-chip{
+  position:absolute;
+  width:46px;height:46px;border-radius:13px;
+  border:2.5px solid var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;
+  box-shadow:4px 4px 0 var(--ink);
+  transform-style:preserve-3d;
+  animation:float3d 6s ease-in-out infinite;
+  will-change:transform;
+}
+.float-chip.c1{top:6%;left:6%;background:var(--stay-teal);animation-delay:0s;}
+.float-chip.c2{top:60%;left:2%;background:var(--petro-orange);animation-delay:.6s;}
+.float-chip.c3{top:0%;right:8%;background:var(--cart-darkgreen);animation-delay:1.1s;}
+.float-chip.c4{top:64%;right:4%;background:var(--medic-pink);animation-delay:1.7s;}
+.float-chip.c5{top:34%;left:16%;background:var(--mech-rust);animation-delay:2.2s;width:38px;height:38px;font-size:16px;}
+.float-chip.c6{top:30%;right:18%;background:var(--scan-cyan);animation-delay:2.8s;width:38px;height:38px;font-size:16px;}
+.float-chip.c7{bottom:0%;left:38%;background:var(--bolt-black);animation-delay:1.4s;width:36px;height:36px;font-size:15px;}
+
+@keyframes float3d{
+  0%,100%{transform:translateY(0) translateZ(0) rotateY(0deg) rotateX(0deg);}
+  25%{transform:translateY(-9px) translateZ(20px) rotateY(10deg) rotateX(-6deg);}
+  50%{transform:translateY(2px) translateZ(-10px) rotateY(-8deg) rotateX(4deg);}
+  75%{transform:translateY(-6px) translateZ(14px) rotateY(6deg) rotateX(-3deg);}
+}
+@media (max-width:760px){
+  .hero-3d{height:150px;}
+  .float-chip.c3,.float-chip.c4,.float-chip.c6{display:none;}
+}
+@media (prefers-reduced-motion:reduce){
+  .float-chip,.hero-ghost{animation:none;}
+}
 
 .hero h1{
   font-size:clamp(34px,6vw,58px);
@@ -182,10 +244,9 @@ img{max-width:100%;display:block;}
   margin-bottom:18px;
 }
 .hero h1 .accent{color:var(--gr-purple);position:relative;display:inline-block;}
-.hero h1 .accent svg{position:absolute;left:0;bottom:-6px;width:100%;}
 
 .hero-sub{
-  font-size:17px;color:var(--ink-soft);line-height:1.6;max-width:520px;margin-bottom:34px;
+  font-size:17px;color:var(--ink-soft);line-height:1.6;max-width:560px;margin-bottom:34px;
 }
 
 .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:20px;}
@@ -195,7 +256,7 @@ img{max-width:100%;display:block;}
   display:flex;align-items:center;gap:8px;
 }
 
-/* app-strip under hero: five little sticker badges linking to sections */
+/* app-strip under hero: seven little sticker badges linking to sections */
 .app-strip{
   display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:44px;
 }
@@ -212,110 +273,77 @@ img{max-width:100%;display:block;}
 .app-chip:hover{transform:translateY(-2px);}
 .chip-badge{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;border:2px solid var(--ink);}
 
-/* ── SECTION SHELL (shared anatomy for all 5 tools) ─── */
-.tool-section{padding:64px 24px;position:relative;}
-.tool-section.alt{background:var(--bg-alt);border-top:var(--outline);border-bottom:var(--outline);}
-
-.tool-inner{
-  max-width:1040px;margin:0 auto;
-  display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;
+/* ── PAYSTACK TRUST STRIP ──────────────────────────── */
+.trust-strip{
+  border-top:var(--outline);border-bottom:var(--outline);
+  background:var(--bg-alt);
+  padding:20px 24px;
 }
-.tool-inner.reverse .tool-visual{order:2;}
-.tool-inner.reverse .tool-copy{order:1;}
+.trust-strip-inner{
+  max-width:1040px;margin:0 auto;
+  display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
+  text-align:center;
+}
+.trust-strip-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:12.5px;
+  padding:8px 16px;border:2px solid var(--ink);border-radius:100px;background:var(--surface);
+}
+.trust-strip-badge b{color:var(--paystack-blue);}
+
+/* ── APP GRID SECTIONS (Everybody / Security) ───────── */
+.apps-section{padding:76px 24px;position:relative;}
+.apps-section.alt{background:var(--bg-alt);border-top:var(--outline);border-bottom:var(--outline);}
 
 .tool-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
   font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:11.5px;
   letter-spacing:.08em;text-transform:uppercase;
   margin-bottom:16px;
+  justify-content:center;
 }
 .tool-eyebrow .sw{width:9px;height:9px;border-radius:3px;border:2px solid var(--ink);}
 
-.tool-title{font-size:clamp(26px,3.4vw,36px);font-weight:600;line-height:1.08;margin-bottom:14px;}
-.tool-body{font-size:14.5px;color:var(--ink-soft);line-height:1.7;max-width:420px;margin-bottom:24px;}
+.section-head h2{font-size:clamp(26px,3.6vw,38px);font-weight:600;line-height:1.1;margin-bottom:14px;}
+.section-head p{font-size:14.5px;color:var(--ink-soft);line-height:1.7;}
 
-.tool-features{display:flex;flex-direction:column;gap:10px;margin-bottom:26px;}
-.tool-feature{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;}
-.tool-feature .fchk{
-  flex-shrink:0;width:20px;height:20px;border-radius:6px;border:2px solid var(--ink);
-  display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-top:1px;
+.app-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  margin-bottom:40px;
 }
-.tool-feature b{font-weight:600;}
-.tool-feature span.desc{color:var(--ink-soft);}
+.app-grid.grid-2{grid-template-columns:repeat(2,1fr);max-width:680px;margin-left:auto;margin-right:auto;}
 
-.tool-price{
-  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-  font-family:'Space Grotesk',sans-serif;font-size:12.5px;color:var(--ink-soft);
-  margin-bottom:26px;
-  padding:12px 16px;
-  border:2px solid var(--ink);
-  border-radius:var(--radius-sm);
-  background:var(--surface);
+.app-card{
+  border:var(--outline);border-radius:var(--radius-md);background:var(--surface);
+  padding:22px;box-shadow:6px 6px 0 var(--ink);
+  display:flex;flex-direction:column;
+  transition:transform .15s ease, box-shadow .15s ease;
 }
-.tool-price strong{font-family:'Fredoka',sans-serif;font-size:16px;color:var(--ink);}
-.free-tag{
-  font-family:'Fredoka',sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.03em;text-transform:uppercase;
-  padding:3px 9px;border-radius:100px;border:2px solid var(--ink);background:#BBF7D0;color:#065F46;
-}
-
-.tool-actions{display:flex;gap:10px;flex-wrap:wrap;}
-
-/* visual side: phone-style sticker mock, built from HTML/CSS, no SVG meters */
-.tool-visual{display:flex;justify-content:center;}
-.mock{
-  width:100%;max-width:300px;
-  border:var(--outline);
-  border-radius:24px;
-  background:var(--surface);
-  box-shadow:9px 9px 0 var(--ink);
-  overflow:hidden;
-  transform:rotate(-1.5deg);
-}
-.tool-inner.reverse .mock{transform:rotate(1.5deg);}
-.mock-bar{
-  padding:10px 14px;display:flex;align-items:center;gap:6px;border-bottom:2.5px solid var(--ink);
-}
-.mock-dot{width:8px;height:8px;border-radius:50%;background:var(--ink);opacity:.15;}
-.mock-title{margin-left:auto;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;opacity:.4;}
-.mock-body{padding:18px;}
-
-/* icon badges — CSS-built, no svg */
-.icon-badge{
-  width:52px;height:52px;border-radius:16px;border:2.5px solid var(--ink);
-  display:flex;align-items:center;justify-content:center;font-size:24px;
+.app-card:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--ink);}
+.app-card-icon{
+  width:46px;height:46px;border-radius:14px;border:2.5px solid var(--ink);
+  display:flex;align-items:center;justify-content:center;font-size:21px;
   box-shadow:3px 3px 0 var(--ink);
   margin-bottom:14px;
 }
+.app-card h3{font-family:'Fredoka',sans-serif;font-size:16px;font-weight:600;margin-bottom:6px;}
+.app-card p{font-size:12.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:14px;flex-grow:1;}
+.app-card .free-tag{margin-right:auto;}
 
-/* result rows used inside mocks (fuel/medic/mech) */
-.res-row{
-  display:flex;align-items:center;gap:10px;
-  padding:11px 12px;border:2px solid var(--ink);border-radius:12px;margin-bottom:9px;
+.free-tag{
+  font-family:'Fredoka',sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.03em;text-transform:uppercase;
+  padding:3px 9px;border-radius:100px;border:2px solid var(--ink);background:#BBF7D0;color:#065F46;
+  display:inline-block;
 }
-.res-row:last-child{margin-bottom:0;}
-.res-icon{width:32px;height:32px;border-radius:9px;border:2px solid var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:15px;}
-.res-name{font-family:'Fredoka',sans-serif;font-weight:600;font-size:12.5px;}
-.res-sub{font-family:'Space Grotesk',sans-serif;font-size:10px;color:var(--ink-faint);}
-.res-dist{margin-left:auto;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:11px;text-align:right;}
-.res-verified{font-size:9px;color:#065F46;}
+.free-tag.always{background:#DBEAFE;color:#1D4ED8;}
 
-/* scanoracle terminal-lite (typed) */
-.term{background:#16151F;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:14px 16px;font-family:'Space Grotesk',sans-serif;font-size:11px;color:#fff;line-height:1.9;}
-.term .p{opacity:.4;}
-.term .k{opacity:.55;}
-.term .v{color:#fff;}
-.term .ok{color:#4ade80;}
-.term .bad{color:#f87171;}
-
-/* bolt speed bars (css bars, not svg gauge) */
-.speed-row{display:flex;align-items:flex-end;gap:5px;height:64px;margin-bottom:14px;}
-.speed-bar{flex:1;border-radius:5px 5px 2px 2px;border:2px solid var(--ink);}
-.speed-readout{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;}
-.speed-num{font-family:'Fredoka',sans-serif;font-weight:600;font-size:30px;}
-.speed-unit{font-family:'Space Grotesk',sans-serif;font-size:12px;color:var(--ink-faint);}
+.section-cta-row{
+  display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap;
+  margin-top:8px;
+}
 
 /* ── HOW IT WORKS strip (shared, simple 3-step) ────── */
-.hiw{display:flex;gap:0;margin-top:8px;}
+.hiw{display:flex;gap:0;margin-top:8px;max-width:900px;margin-left:auto;margin-right:auto;}
 .hiw-step{flex:1;text-align:left;padding-right:14px;}
 .hiw-num{
   font-family:'Fredoka',sans-serif;font-weight:600;font-size:11px;
@@ -349,24 +377,78 @@ img{max-width:100%;display:block;}
   padding:5px 12px;border:2px solid var(--ink);border-radius:100px;font-weight:600;background:var(--surface);
 }
 
-/* ── FOOTER CTA ─────────────────────────────────────── */
+/* ── FAQ ─────────────────────────────────────────────*/
+.faq{padding:70px 24px;}
+.faq-inner{max-width:760px;margin:0 auto;}
+.faq-item{border:var(--outline);border-radius:var(--radius-md);background:var(--surface);box-shadow:5px 5px 0 var(--ink);margin-bottom:14px;overflow:hidden;}
+.faq-q{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:18px 20px;cursor:pointer;
+  font-family:'Fredoka',sans-serif;font-weight:600;font-size:14.5px;
+  list-style:none;
+}
+.faq-q::-webkit-details-marker{display:none;}
+.faq-q .plus{flex-shrink:0;width:22px;height:22px;border:2px solid var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;transition:transform .2s ease;}
+details[open] .faq-q .plus{transform:rotate(45deg);}
+.faq-a{padding:0 20px 18px;font-size:13.5px;color:var(--ink-soft);line-height:1.65;}
+
+/* ── FOOTER CTA / SSO SIGNUP ─────────────────────────── */
 .final-cta{
-  padding:70px 24px 90px;text-align:center;position:relative;
+  padding:70px 24px 90px;position:relative;
   background:var(--gr-purple);
   color:#fff;
   border-top:var(--outline);
 }
+.final-cta-inner{
+  max-width:1040px;margin:0 auto;
+  display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:center;
+}
 .final-cta h2{font-size:clamp(28px,4vw,42px);font-weight:600;margin-bottom:14px;}
-.final-cta p{font-size:14.5px;color:rgba(255,255,255,0.78);max-width:420px;margin:0 auto 30px;line-height:1.6;}
+.final-cta p{font-size:14.5px;color:rgba(255,255,255,0.78);max-width:440px;margin:0 0 22px;line-height:1.6;}
 .final-cta .btn{color:var(--ink);}
 
+.signup-benefits{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.signup-benefits li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:rgba(255,255,255,0.9);}
+.signup-benefits .fchk{
+  flex-shrink:0;width:20px;height:20px;border-radius:6px;border:2px solid #fff;
+  display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-top:1px;
+  background:rgba(255,255,255,0.12);
+}
+
+/* mini account preview mock for the signup section */
+.account-mock{
+  background:var(--surface);color:var(--ink);
+  border:3px solid var(--ink);border-radius:22px;
+  box-shadow:9px 9px 0 rgba(0,0,0,0.35);
+  overflow:hidden;
+  transform:rotate(-1.2deg);
+}
+.account-mock-bar{padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:2.5px solid var(--ink);}
+.account-mock-bar img{width:22px;height:22px;border-radius:6px;}
+.account-mock-bar span{font-family:'Fredoka',sans-serif;font-weight:600;font-size:13px;}
+.account-mock-body{padding:18px;}
+.account-mock-row{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 12px;border:2px solid var(--ink);border-radius:12px;margin-bottom:8px;
+  font-size:12px;
+}
+.account-mock-row:last-child{margin-bottom:0;}
+.account-mock-ico{width:28px;height:28px;border-radius:8px;border:2px solid var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;}
+.account-mock-name{font-family:'Fredoka',sans-serif;font-weight:600;font-size:12px;}
+.account-mock-tag{margin-left:auto;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:9.5px;padding:3px 8px;border-radius:100px;border:1.5px solid var(--ink);background:#BBF7D0;color:#065F46;}
+
 .footer{
-  padding:26px 24px;text-align:center;
+  padding:32px 24px;
   font-family:'Space Grotesk',sans-serif;font-size:11.5px;color:var(--ink-faint);
   border-top:var(--outline);
-  display:flex;flex-direction:column;gap:6px;
 }
+.footer-inner{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:16px;}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:24px;}
+.footer-apps{display:flex;flex-wrap:wrap;gap:10px 18px;}
+.footer-apps a{text-decoration:none;color:var(--ink-faint);transition:color .15s;}
+.footer-apps a:hover{color:var(--ink-soft);}
 .footer b{color:var(--ink-soft);}
+.footer-bottom{border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
 
 /* ── reveal-on-scroll ───────────────────────────────── */
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease, transform .5s ease;}
@@ -374,29 +456,15 @@ img{max-width:100%;display:block;}
 
 /* ── MOBILE ─────────────────────────────────────────── */
 @media (max-width:760px){
-  .tool-inner{grid-template-columns:1fr;gap:32px;}
-  .tool-inner.reverse .tool-visual{order:1;}
-  .tool-inner.reverse .tool-copy{order:2;}
-  .tool-copy{text-align:left;}
+  .app-grid{grid-template-columns:1fr;}
+  .app-grid.grid-2{grid-template-columns:1fr;}
   .trust-grid{grid-template-columns:1fr;}
   .hiw{flex-direction:column;gap:16px;}
   .hiw-step{padding-right:0;}
-
-  /* Long CTA buttons (e.g. "Check Out Petro . Find The Nearest Filling
-     Station") use white-space:nowrap, and grid items don't shrink below
-     their content's natural width by default. That was stretching
-     .tool-copy/.tool-visual past the viewport edge, so section
-     backgrounds didn't fully wrap their content on mobile. Letting grid
-     items shrink and letting button text wrap fixes it. */
-  .tool-copy, .tool-visual{min-width:0;}
-  .tool-actions .btn{white-space:normal;text-align:center;}
+  .final-cta-inner{grid-template-columns:1fr;gap:32px;}
+  .footer-top{flex-direction:column;}
 }
 
-/* On very narrow phones (~360px and below) the brand mark, theme toggle,
-   and "Get Started" button were slightly wider than the available nav
-   space and pushed past the screen edge. Tightening the nav's own
-   spacing (not touching anything else) keeps it on one line and inside
-   the viewport. */
 @media (max-width:400px){
   .nav-inner{padding:14px 16px;gap:8px;}
   .nav-brand{font-size:16px;gap:6px;}
@@ -417,15 +485,14 @@ img{max-width:100%;display:block;}
       Ghostroute⚡
     </div>
     <div class="nav-links">
-      <a href="#scanoracle">ScanOracle</a>
-      <a href="#bolt">Bolt</a>
-      <a href="#petro">Petro</a>
-      <a href="#medicnear">MedicNear</a>
-      <a href="#mechfind">MechFind</a>
+      <a href="#everybody">For Everybody</a>
+      <a href="#security">Security</a>
+      <a href="#trust">Pricing &amp; Trust</a>
+      <a href="#faq">FAQ</a>
     </div>
     <div class="nav-cta">
       <button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch to light mode">🌙</button>
-      <a href="#signup" class="btn btn-primary" style="padding:10px 20px;font-size:13px;box-shadow:3px 3px 0 var(--ink);">Get Started</a>
+      <a href="#signup" class="btn btn-primary btn-sm">Get Started</a>
     </div>
   </div>
 </nav>
@@ -433,312 +500,173 @@ img{max-width:100%;display:block;}
 <!-- ── HERO ────────────────────────────────────────── -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="pill" style="margin-bottom:22px;"><span class="dot"></span> Live now</div>
+    <div class="pill" style="margin-bottom:22px;"><span class="dotinvalid">🐉</span> Designed for power users</div>
 
-    <div class="hero-ghost">
-      <img src="https://res.cloudinary.com/dtitx4alw/image/upload/v1781532568/vh1rsn83gnj5banbpfod.jpg" alt="Ghostroute mascot" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-      <div class="img-fallback img-fallback-lg">👻</div>
+    <div class="hero-3d" id="hero3d">
+      <div class="float-chip c1">🏨</div>
+      <div class="float-chip c2">⛽</div>
+      <div class="float-chip c3">🛒</div>
+      <div class="float-chip c4">➕</div>
+      <div class="float-chip c5">🔧</div>
+      <div class="float-chip c6">🛰️</div>
+      <div class="float-chip c7">⚡</div>
+      <div class="hero-ghost">
+        <img src="https://res.cloudinary.com/dtitx4alw/image/upload/v1781532568/vh1rsn83gnj5banbpfod.jpg" alt="Ghostroute mascot" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="img-fallback img-fallback-lg">👻</div>
+      </div>
     </div>
 
-    <h1>Five <span class="accent">ultra powerful</span> mini applications that <span class="accent">actually help.</span><br>One Ghostroute account.</h1>
+    <h1><span class="accent">ultra-powerful</span> mini applications that <span class="accent">actually help.</span><br>One Ghostroute account.</h1>
 
-    <p class="hero-sub">Check any IP, test your real internet speed, find fuel, find care, or find a mechanic near you — all verified, all clearly priced. Your first search on every tool is free.</p>
+    <p class="hero-sub">Ghostroute gives you powered internet apps designed for everyday life, all from one mega app.</p>
 
     <div class="hero-ctas">
       <a href="#signup" class="btn btn-primary">Create free account</a>
-      <a href="#scanoracle" class="btn btn-ghost">See the tools ↓</a>
+      <a href="#everybody" class="btn btn-ghost">See the tools ↓</a>
     </div>
 
     <p class="hero-note">No hidden charges · Pricing shown before every paid search · Cancel anytime</p>
 
     <div class="app-strip">
-      <a href="#scanoracle" class="app-chip"><span class="chip-badge" style="background:var(--scan-cyan);">🛰️</span> ScanOracle</a>
-      <a href="#bolt" class="app-chip"><span class="chip-badge" style="background:#1c1a28;">⚡</span> Bolt</a>
-      <a href="#petro" class="app-chip"><span class="chip-badge" style="background:var(--petro-orange);">⛽</span> Petro</a>
-      <a href="#medicnear" class="app-chip"><span class="chip-badge" style="background:var(--medic-pink);">➕</span> MedicNear</a>
-      <a href="#mechfind" class="app-chip"><span class="chip-badge" style="background:var(--mech-rust);">🔧</span> MechFind</a>
+      <a href="#everybody" class="app-chip"><span class="chip-badge" style="background:var(--stay-teal);">🏨</span> BlackGrid</a>
+      <a href="#everybody" class="app-chip"><span class="chip-badge" style="background:var(--petro-orange);">⛽</span> Petro</a>
+      <a href="#everybody" class="app-chip"><span class="chip-badge" style="background:var(--cart-darkgreen);">🛒</span> Cart</a>
+      <a href="#everybody" class="app-chip"><span class="chip-badge" style="background:var(--medic-pink);">➕</span> MedicNear</a>
+      <a href="#everybody" class="app-chip"><span class="chip-badge" style="background:var(--mech-rust);">🔧</span> MechFind</a>
+      <a href="#security" class="app-chip"><span class="chip-badge" style="background:var(--scan-cyan);">🛰️</span> ScanOracle</a>
+      <a href="#security" class="app-chip"><span class="chip-badge" style="background:var(--bolt-black);">⚡</span> Bolt</a>
     </div>
   </div>
 </section>
 
-<!-- ── SCANORACLE ──────────────────────────────────── -->
-<section class="tool-section" id="scanoracle">
-  <div class="tool-inner">
-    <div class="tool-copy reveal">
-      <div class="tool-eyebrow" style="color:var(--scan-cyan-deep);"><span class="sw" style="background:var(--scan-cyan);"></span> ScanOracle · IP Lookup</div>
-      <h2 class="tool-title">Know what's behind any IP address.</h2>
-      <p class="tool-body">One lookup surfaces VPN and proxy activity, Tor exit nodes, blacklist status, and a plain-language threat score — plus network, location and ownership details.</p>
-
-      <div class="tool-features">
-        <div class="tool-feature"><span class="fchk" style="background:var(--scan-cyan);">✓</span><span><b>46+ data fields</b> <span class="desc">— hostname, ASN, region, network owner and more</span></span></div>
-        <div class="tool-feature"><span class="fchk" style="background:var(--scan-cyan);">✓</span><span><b>Risk signals</b> <span class="desc">— VPN, proxy, Tor and blacklist flags in one response</span></span></div>
-        <div class="tool-feature"><span class="fchk" style="background:var(--scan-cyan);">✓</span><span><b>No subscription</b> <span class="desc">— pay only for the lookups you run</span></span></div>
-      </div>
-
-      <div class="tool-price">
-        <strong>$0.10</strong> per data <span class="free-tag">16+ free data lookups . 42+ total data lookups</span> 
-      </div>
-
-      <div class="tool-actions">
-        <a href="https://scanoracle.ghostroute.icu" class="btn btn-primary" style="background:var(--scan-cyan);">Visit ScanOracle IP . $5 Free Bonus</a>
-      </div>
-    </div>
-
-    <div class="tool-visual reveal">
-      <div class="mock">
-        <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-title">scanoracle · result</span></div>
-        <div class="mock-body">
-          <div class="icon-badge" style="background:var(--scan-cyan);">🛰️</div>
-          <div class="term">
-            <div><span class="p">$</span> <span class="k">ip</span> <span class="v">1.1.1.1</span></div>
-            <div><span class="k">hostname</span> <span class="v">cloudflare.com</span></div>
-            <div><span class="k">country</span> <span class="v">Australia</span></div>
-            <div><span class="k">is_vpn</span> <span class="bad">false</span></div>
-            <div><span class="k">is_tor</span> <span class="bad">false</span></div>
-            <div><span class="k">blacklist</span> <span class="bad">false</span></div>
-            <div><span class="k">threat</span> <span class="ok">low · 14%</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- ── PAYSTACK TRUST STRIP ──────────────────────────── -->
+<div class="trust-strip">
+  <div class="trust-strip-inner">
+    <span class="trust-strip-badge">🔒 Bank-grade payments secured by <b>Paystack</b></span>
+    <span class="trust-strip-badge">🐉 Built for power users, made for everyone</span>
+    <span class="trust-strip-badge">🎟️ First search free on every app</span>
   </div>
+</div>
 
-  <div class="wrap reveal" style="margin-top:56px;">
-    <div class="hiw">
-      <div class="hiw-step"><div class="hiw-num">1</div><h4>Send an IP</h4><p>One HTTPS call, any IPv4 or IPv6 address. No SDK required.</p></div>
-      <div class="hiw-step"><div class="hiw-num">2</div><h4>Signals run</h4><p>VPN, proxy, Tor and blacklist checks complete in under 100ms.</p></div>
-      <div class="hiw-step"><div class="hiw-num">3</div><h4>You get clean JSON</h4><p>Only the fields you asked for, priced per lookup, nothing extra.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ── BOLT ────────────────────────────────────────── -->
-<section class="tool-section alt" id="bolt">
-  <div class="tool-inner reverse">
-    <div class="tool-copy reveal">
-      <div class="tool-eyebrow" style="color:var(--bolt-amber-deep);"><span class="sw" style="background:var(--bolt-amber);"></span> Bolt · Speed Test</div>
-      <h2 class="tool-title">Your connection, measured honestly.</h2>
-      <p class="tool-body">Most speed tests give you one number and disappear. Bolt measures your download in timed chunks so you can see exactly when — and if — your connection slows mid-session.</p>
-
-      <div class="tool-features">
-        <div class="tool-feature"><span class="fchk" style="background:var(--bolt-amber);">✓</span><span><b>Chunk-by-chunk analysis</b> <span class="desc">— see dips a single average would hide</span></span></div>
-        <div class="tool-feature"><span class="fchk" style="background:var(--bolt-amber);">✓</span><span><b>Peak and true average</b> <span class="desc">— reported side by side, not blended</span></span></div>
-        <div class="tool-feature"><span class="fchk" style="background:var(--bolt-amber);">✓</span><span><b>Always free</b> <span class="desc">— run as many speed tests as you like</span></span></div>
-      </div>
-
-      <div class="tool-price">
-        <strong>Free</strong> unlimited speed tests <span class="free-tag">No account needed</span>
-      </div>
-
-      <div class="tool-actions">
-        <a href="https://bolt.ghostroute.icu" class="btn btn-primary" style="background:var(--bolt-amber);color:var(--ink);">Visit Bolt . Free Internet Speed Test</a>
-      </div>
+<!-- ── GHOSTROUTE FOR EVERYBODY ──────────────────────── -->
+<section class="apps-section" id="everybody">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tool-eyebrow" style="color:var(--gr-purple-deep);"><span class="sw" style="background:var(--gr-purple);"></span> Ghostroute for Everybody</div>
+      <h2>Everyday finders, one login.</h2>
+      <p>Instead of installing several different apps, you simply open Ghostroute⚡</p>
+      <p>Restaurants, eats, hotels, markets, stays, fuel, groceries, clinics, hospicals, gas, care and vehicle repairs — verified listings wherever you are, sorted by real distance near you, ready whenever you need them.</p>
     </div>
 
-    <div class="tool-visual reveal">
-      <div class="mock">
-        <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-title">bolt · live</span></div>
-        <div class="mock-body">
-          <div class="icon-badge" style="background:var(--bolt-amber);">⚡</div>
-          <div class="speed-readout">
-            <span class="speed-num">86.4</span>
-            <span class="speed-unit">Mbps down</span>
-          </div>
-          <div class="speed-row">
-            <div class="speed-bar" style="height:38%;background:var(--bolt-amber);"></div>
-            <div class="speed-bar" style="height:62%;background:var(--bolt-amber);"></div>
-            <div class="speed-bar" style="height:50%;background:var(--bolt-amber);"></div>
-            <div class="speed-bar" style="height:84%;background:var(--bolt-amber);"></div>
-            <div class="speed-bar" style="height:70%;background:var(--bolt-amber);"></div>
-            <div class="speed-bar" style="height:94%;background:var(--bolt-amber);"></div>
-            <div class="speed-bar" style="height:66%;background:var(--bolt-amber);"></div>
-            <div class="speed-bar" style="height:58%;background:var(--bolt-amber);"></div>
-          </div>
-          <div class="res-row" style="margin-bottom:0;">
-            <div class="res-name">Peak 94.2 · Avg 68.1 Mbps</div>
-            <div class="res-dist">&lt;50ms</div>
-          </div>
-        </div>
+    <div class="app-grid">
+      <div class="app-card reveal">
+        <div class="app-card-icon" style="background:var(--stay-teal);">🏨</div>
+        <h3>BlackGrid</h3>
+        <p>Discover great hotels, airbnbs, restaurants, and eats wherever you are.</p>
+        <span class="free-tag">1st try free</span>
+      </div>
+      <div class="app-card reveal">
+        <div class="app-card-icon" style="background:var(--petro-orange);">⛽</div>
+        <h3>Petro</h3>
+        <p>Locate the nearest fuel and gas filling stations, sorted by real distance.</p>
+        <span class="free-tag">1st try free</span>
+      </div>
+      <div class="app-card reveal">
+        <div class="app-card-icon" style="background:var(--cart-green);">🛒</div>
+        <h3>Cart</h3>
+        <p>Find supermarkets, malls, local markets, and farm produce stalls near you.</p>
+        <span class="free-tag">1st try free</span>
+      </div>
+      <div class="app-card reveal">
+        <div class="app-card-icon" style="background:var(--medic-pink);">➕</div>
+        <h3>MedicNear</h3>
+        <p>Find hospitals, clinics and pharmacies near you, rated by other patients.</p>
+        <span class="free-tag">1st try free</span>
+      </div>
+      <div class="app-card reveal">
+        <div class="app-card-icon" style="background:var(--mech-rust);">🔧</div>
+        <h3>MechFind</h3>
+        <p>Find vetted mechanics and vehicle repair shops near you, one tap to call.</p>
+        <span class="free-tag">1st try free</span>
       </div>
     </div>
-  </div>
 
-  <div class="wrap reveal" style="margin-top:56px;">
-    <div class="hiw">
-      <div class="hiw-step"><div class="hiw-num">1</div><h4>Test starts instantly</h4><p>Your browser opens a connection to the nearest node. No installs.</p></div>
-      <div class="hiw-step"><div class="hiw-num">2</div><h4>Chunks are timed</h4><p>The transfer is sliced into segments, each measured on its own.</p></div>
-      <div class="hiw-step"><div class="hiw-num">3</div><h4>You get the full picture</h4><p>Peak, average and a live readout — not a single smoothed number.</p></div>
+    <div class="section-head reveal">
+	    <p>. Built for power users 🐉.</p>
+    </div>
+
+    <div class="section-cta-row reveal">
+      <a href="/everybody" class="link-arrow">Learn more about these apps →</a>
+      <a href="https://www.ghostroute.icu" class="btn btn-primary">Use Ghostroute⚡</a>
     </div>
   </div>
 </section>
 
-<!-- ── PETRO ───────────────────────────────────────── -->
-<section class="tool-section" id="petro">
-  <div class="tool-inner">
-    <div class="tool-copy reveal">
-      <div class="tool-eyebrow" style="color:var(--petro-orange-deep);"><span class="sw" style="background:var(--petro-orange);"></span> Petro · Fuel Finder</div>
-      <h2 class="tool-title">Find fuel before you're coasting to a stop.</h2>
-      <p class="tool-body">Petro scans verified filling stations near your exact location and sorts them by real distance, so you spend less time guessing and more time driving.</p>
+<!-- ── GHOSTROUTE SECURITY ───────────────────────────── -->
+<section class="apps-section alt" id="security">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tool-eyebrow" style="color:var(--scan-cyan-deep);"><span class="sw" style="background:var(--scan-cyan);"></span> Ghostroute Security</div>
+      <h2>Lightweight tools for quick answers.</h2>
+      <p>Better than IpInfo and Fast.com 📡</p>
+      <p>Security-minded utilities built for anyone who needs a fast, reliable read — no subscription, no bloat, free to use.</p>
+    </div>
 
-      <div class="tool-features">
-        <div class="tool-feature"><span class="fchk" style="background:var(--petro-orange);">✓</span><span><b>Verified stations only</b> <span class="desc">— every listing is checked before it's shown</span></span></div>
-        <div class="tool-feature"><span class="fchk" style="background:var(--petro-orange);">✓</span><span><b>Sorted by real distance</b> <span class="desc">— measured from your precise location</span></span></div>
-        <div class="tool-feature"><span class="fchk" style="background:var(--petro-orange);">✓</span><span><b>Maps or a call</b> <span class="desc">— one tap for directions, no middleman</span></span></div>
+    <div class="app-grid grid-2">
+      <div class="app-card reveal">
+        <div class="app-card-icon" style="background:var(--scan-cyan);">🛰️</div>
+        <h3>ScanOracle</h3>
+        <p>Geolocate any IP address with full intelligence — VPN, ASN, location, network, contacts, proxy, Tor and blacklist signals, plus 46+ data fields.</p>
+        <span class="free-tag">16+ free data keys</span>
       </div>
-
-      <div class="tool-price">
-        <strong>$0.20</strong> per search <span class="free-tag">First search free</span>
-      </div>
-
-      <div class="tool-actions">
-        <a href="https://petro.ghostroute.icu" class="btn btn-primary" style="background:var(--petro-orange);">Check Out Petro . Find The Nearest Filling Station</a>
+      <div class="app-card reveal">
+        <div class="app-card-icon" style="background:var(--bolt-black);">⚡</div>
+        <h3>Bolt</h3>
+        <p>Real-time internet speed and network quality diagnostics, measured chunk-by-chunk, not just one number.</p>
+        <span class="free-tag always">Always free</span>
       </div>
     </div>
 
-    <div class="tool-visual reveal">
-      <div class="mock">
-        <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-title">petro · results</span></div>
-        <div class="mock-body">
-          <div class="icon-badge" style="background:var(--petro-orange);">⛽</div>
-          <div class="res-row">
-            <div class="res-icon" style="background:var(--petro-orange);">⛽</div>
-            <div><div class="res-name">Nano Fuel Depot</div><div class="res-verified">✓ Verified</div></div>
-            <div class="res-dist">0.6 km</div>
-          </div>
-          <div class="res-row">
-            <div class="res-icon" style="background:var(--petro-orange);">⛽</div>
-            <div><div class="res-name">Ghostroute Filling Station</div><div class="res-verified">✓ Verified</div></div>
-            <div class="res-dist">1.4 km</div>
-          </div>
-        </div>
-      </div>
+    <div class="section-head reveal">
+      <p>. Designed for power users 🐉.</p>
     </div>
-  </div>
 
-  <div class="wrap reveal" style="margin-top:56px;">
-    <div class="hiw">
-      <div class="hiw-step"><div class="hiw-num">1</div><h4>Allow your location</h4><p>A one-time prompt so Petro can measure real distance, not a guess.</p></div>
-      <div class="hiw-step"><div class="hiw-num">2</div><h4>We scan the radius</h4><p>Verified stations near you are pulled up and sorted closest-first.</p></div>
-      <div class="hiw-step"><div class="hiw-num">3</div><h4>Get directions or call</h4><p>Tap to open Maps, or call the station directly to check availability.</p></div>
+    <div class="section-cta-row reveal">
+      <a href="/security" class="link-arrow">Learn more about these tools →</a>
+      <a href="https://www.ghostroute.icu" class="btn btn-primary" style="background:var(--scan-cyan);">Use Ghostroute⚡</a>
     </div>
   </div>
 </section>
 
-<!-- ── MEDICNEAR ───────────────────────────────────── -->
-<section class="tool-section alt" id="medicnear">
-  <div class="tool-inner reverse">
-    <div class="tool-copy reveal">
-      <div class="tool-eyebrow" style="color:var(--medic-pink-deep);"><span class="sw" style="background:var(--medic-pink);"></span> MedicNear · Care Finder</div>
-      <h2 class="tool-title">Find care near you, anytime.</h2>
-      <p class="tool-body">MedicNear helps you find hospitals, clinics and pharmacies around your exact location, sorted by distance with ratings from other patients — so getting care is one search, not an afternoon of asking around.</p>
-
-      <div class="tool-features">
-        <div class="tool-feature"><span class="fchk" style="background:var(--medic-pink);">✓</span><span><b>Verified facilities</b> <span class="desc">— only trusted hospitals, clinics and pharmacies</span></span></div>
-        <div class="tool-feature"><span class="fchk" style="background:var(--medic-pink);">✓</span><span><b>Real patient ratings</b> <span class="desc">— from people who've actually visited</span></span></div>
-        <div class="tool-feature"><span class="fchk" style="background:var(--medic-pink);">✓</span><span><b>Call or view instantly</b> <span class="desc">— no forms, no waiting on a reply</span></span></div>
-      </div>
-
-      <div class="tool-price">
-        <strong>$0.20</strong> per search <span class="free-tag">First search free</span>
-      </div>
-
-      <div class="tool-actions">
-        <a href="https://medicnear.ghostroute.icu" class="btn btn-primary" style="background:var(--medic-pink);">Nearest Health Center . 10 mins away . Visit MedicNear</a>
-      </div>
+<!-- ── HOW IT WORKS ───────────────────────────────────── -->
+<section class="apps-section" style="padding-bottom:20px;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tool-eyebrow" style="color:var(--gr-purple-deep);justify-content:center;"><span class="sw" style="background:var(--gr-purple);"></span> How it works</div>
+      <h2>One account, many internet apps for everybody to use.</h2>
+      <p>⭐ Every tool follows the same simple shape, so switching between them never feels new.</p>
     </div>
-
-    <div class="tool-visual reveal">
-      <div class="mock">
-        <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-title">medicnear · results</span></div>
-        <div class="mock-body">
-          <div class="icon-badge" style="background:var(--medic-pink);">➕</div>
-          <div class="res-row">
-            <div class="res-icon" style="background:var(--medic-pink);">🏥</div>
-            <div><div class="res-name">City Hospital</div><div class="res-verified">★ 4.3 · Verified</div></div>
-            <div class="res-dist">0.3 km</div>
-          </div>
-          <div class="res-row">
-            <div class="res-icon" style="background:var(--medic-pink);">💊</div>
-            <div><div class="res-name">HealthPlus Clinic</div><div class="res-verified">★ 4.6 · Verified</div></div>
-            <div class="res-dist">0.6 km</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="wrap reveal" style="margin-top:56px;">
-    <div class="hiw">
-      <div class="hiw-step"><div class="hiw-num">1</div><h4>Allow your location</h4><p>MedicNear measures real distance to nearby facilities.</p></div>
-      <div class="hiw-step"><div class="hiw-num">2</div><h4>We scan nearby care</h4><p>Verified hospitals, clinics and pharmacies pulled up and sorted.</p></div>
-      <div class="hiw-step"><div class="hiw-num">3</div><h4>Call or view the facility</h4><p>Tap to call ahead or open the profile for address and directions.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ── MECHFIND ────────────────────────────────────── -->
-<section class="tool-section" id="mechfind">
-  <div class="tool-inner">
-    <div class="tool-copy reveal">
-      <div class="tool-eyebrow" style="color:var(--mech-rust-deep);"><span class="sw" style="background:var(--mech-rust);"></span> MechFind · Mechanic Finder</div>
-      <h2 class="tool-title">Find a vetted mechanic before your battery does.</h2>
-      <p class="tool-body">MechFind scans verified auto repair shops around your exact location, so a breakdown costs you a phone call — not an afternoon on the shoulder.</p>
-
-      <div class="tool-features">
-        <div class="tool-feature"><span class="fchk" style="background:var(--mech-rust);">✓</span><span><b>Verified mechanics only</b> <span class="desc">— every listing carries a verification badge</span></span></div>
-        <div class="tool-feature"><span class="fchk" style="background:var(--mech-rust);">✓</span><span><b>Nearest auto repair shops first</b> <span class="desc">— distance-sorted results, no scrolling</span></span></div>
-        <div class="tool-feature"><span class="fchk" style="background:var(--mech-rust);">✓</span><span><b>Direct call</b> <span class="desc">— one tap dials the shop, no bidding</span></span></div>
-      </div>
-
-      <div class="tool-price">
-        <strong>$0.20</strong> per search <span class="free-tag">First search free</span>
-      </div>
-
-      <div class="tool-actions">
-        <a href="https://mechfind.ghostroute.icu" class="btn btn-primary" style="background:var(--mech-rust);">Need A Mechanic? . Visit Ghostroute . Use MechFind</a>
-      </div>
-    </div>
-
-    <div class="tool-visual reveal">
-      <div class="mock">
-        <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-title">mechfind · results</span></div>
-        <div class="mock-body">
-          <div class="icon-badge" style="background:var(--mech-rust);">🔧</div>
-          <div class="res-row">
-            <div class="res-icon" style="background:var(--mech-rust);">🚗</div>
-            <div><div class="res-name">MadMax Auto Maintenance</div><div class="res-verified">★ 4.7 · Verified</div></div>
-            <div class="res-dist">0.4 km</div>
-          </div>
-          <div class="res-row">
-            <div class="res-icon" style="background:var(--mech-rust);">🔩</div>
-            <div><div class="res-name">Ghostroute Car Repair</div><div class="res-verified">★ 4.9 · Verified</div></div>
-            <div class="res-dist">1.0 km</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="wrap reveal" style="margin-top:56px;">
-    <div class="hiw">
-      <div class="hiw-step"><div class="hiw-num">1</div><h4>Allow your location</h4><p>A one-time prompt so MechFind can measure real distance to shops.</p></div>
-      <div class="hiw-step"><div class="hiw-num">2</div><h4>We scan the radius</h4><p>Verified auto repair shops nearby, pulled up and sorted closest-first.</p></div>
-      <div class="hiw-step"><div class="hiw-num">3</div><h4>Call or view the mechanic</h4><p>Tap to call the shop directly or open their profile for directions.</p></div>
+    <div class="hiw reveal">
+      <div class="hiw-step"><div class="hiw-num">1</div><h4>Create your account</h4><p>One signup unlocks all Ghostroute tools — no separate logins, no personal detail collected.</p></div>
+      <div class="hiw-step"><div class="hiw-num">2</div><h4>Run your first search free</h4><p>Every paid tool gives you one free search before you ever spend a dime.</p></div>
+      <div class="hiw-step"><div class="hiw-num">3</div><h4>Top up only if you need to</h4><p>Pay per search from a Paystack-secured balance — no subscriptions, no auto-renewals.</p></div>
     </div>
   </div>
 </section>
 
 <!-- ── TRUST / PRICING ─────────────────────────────── -->
-<section class="trust">
+<section class="trust" id="trust">
   <div class="trust-inner">
-    <h2>Pricing you can see coming.</h2>
-    <p>Every tool shows its price before you search — never after. Your first search on every paid tool is free, so you know exactly what you're getting before you spend anything.</p>
+    <h2 class="reveal">Pricing you can see coming.</h2>
+    <p class="reveal">. Paying for a service should feel as predictable as using it .
+    <br />
+    Before a single credit is used, you'll always know exactly what the search costs. No hidden fees. No unexpected deductions, so you know exactly what you're getting before you spend anything.</p>
 
     <div class="trust-grid">
       <div class="trust-card reveal">
-        <div class="trust-ico">👁️</div>
-        <h3>Price shown upfront</h3>
-        <p>No surprise deductions. The cost of a search is always visible before you run it.</p>
+        <div class="trust-ico">🥤</div>
+        <h3>Trust us</h3>
+        <p>You'll never be charged without knowing. If you don't like the price, simply don't continue.</p>
       </div>
       <div class="trust-card reveal">
         <div class="trust-ico">🎟️</div>
@@ -746,28 +674,124 @@ img{max-width:100%;display:block;}
         <p>Try any paid tool once at no cost, on every mini-app, no card required to start.</p>
       </div>
       <div class="trust-card reveal">
-        <div class="trust-ico">🔒</div>
+        <div class="trust-ico">💰</div>
         <h3>Secure top-ups</h3>
-        <p>Top up your balance from ₦100 / $1 whenever you need to, processed via Paystack.</p>
+        <p>No monthly subscription forcing you to pay for tools you don't use.</p>
       </div>
     </div>
 
     <div class="pay-note">
+      <span class="pay-badge">Top up your balance only when you need to</span>
       <span class="pay-badge">💳 Payments processed by Paystack</span>
     </div>
   </div>
 </section>
 
-<!-- ── FINAL CTA ────────────────────────────────────── -->
+<!-- ── FAQ ─────────────────────────────────────────────-->
+<section class="faq" id="faq">
+  <div class="faq-inner">
+    <div class="section-head reveal">
+      <div class="tool-eyebrow" style="color:var(--gr-purple-deep);justify-content:center;"><span class="sw" style="background:var(--gr-purple);"></span> FAQ</div>
+      <h2>Good to know.</h2>
+    </div>
+
+    <details class="faq-item reveal">
+      <summary class="faq-q">Do I need a separate account for each app? <span class="plus">+</span></summary>
+      <p class="faq-a">No. One Ghostroute account automatically gives you access to all of Ghostroute's mini-app — all from the same login and the same balance.</p>
+    </details>
+    <details class="faq-item reveal">
+      <summary class="faq-q">Is my first search really free? <span class="plus">+</span></summary>
+      <p class="faq-a">Yes. Every paid tool gives you one free search with no card required to start. Bolt is unlimited and free at all times.</p>
+    </details>
+    <details class="faq-item reveal">
+      <summary class="faq-q">How do i contact Ghostroute's Support team? <span class="plus">+</span></summary>
+      <p class="faq-a">Simple. You can reach out to Ghostroute by sending email to: <b><i>ghostroute.security@gmail.com</i></b></p>
+
+    </details>
+    <details class="faq-item reveal">
+      <summary class="faq-q">How do payments and top-ups work? <span class="plus">+</span></summary>
+      <p class="faq-a">All top-ups and payments are processed securely through Paystack. You top up your balance from as little as ₦100 / $1, and each search deducts only its listed price — shown before you ever process it.</p>
+    </details>
+    <details class="faq-item reveal">
+      <summary class="faq-q">Can I cancel or stop using a tool anytime? <span class="plus">+</span></summary>
+      <p class="faq-a">There's nothing to cancel — there are no subscriptions. You only ever pay per search (or data), so you can stop, pause, or come back whenever you like.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ── FINAL CTA / SIGNUP ────────────────────────────── -->
 <section class="final-cta" id="signup">
-  <h2>Create your Ghostroute account.</h2>
-  <p>One login for ScanOracle, Bolt, Petro, MedicNear and MechFind. Your first search on every paid tool is on us.</p>
-  <a href="https://www.ghostroute.icu" class="btn">Create free account</a>
+  <div class="final-cta-inner">
+    <div class="reveal">
+      <h2>Create your Ghostroute account.</h2>
+      <p>One login for BlackGrid, Petro, Cart, MedicNear, MechFind, ScanOracle and Bolt. Your first search on every paid tool is on us.</p>
+
+      <ul class="signup-benefits">
+	<li><span class="fchk">🐉</span> Built for power users, made for everybody</li>
+        <li><span class="fchk">🔗</span> 7+ powerful tools, one account, one balance</li>
+        <li><span class="fchk">✓</span> First search free on every paid app</li>
+        <li><span class="fchk">🌟</span> Prices shown before you ever search</li>
+        <li><span class="fchk">💲</span> Secure top-ups and payments via Paystack</li>
+      </ul>
+
+      <a href="https://www.ghostroute.icu" class="btn">● Create free account ●</a>
+    </div>
+
+    <div class="reveal">
+      <div class="account-mock">
+        <div class="account-mock-bar">
+          <img src="https://res.cloudinary.com/dtitx4alw/image/upload/v1781532568/vh1rsn83gnj5banbpfod.jpg" alt="" onerror="this.style.display='none';">
+          <span>Welcome back 👋</span>
+        </div>
+        <div class="account-mock-body">
+          <div class="account-mock-row">
+            <div class="account-mock-ico" style="background:var(--stay-teal);">🏨</div>
+            <div class="account-mock-name">BlackGrid</div>
+            <div class="account-mock-tag">1st try free</div>
+          </div>
+          <div class="account-mock-row">
+            <div class="account-mock-ico" style="background:var(--petro-orange);">⛽</div>
+            <div class="account-mock-name">Petro</div>
+            <div class="account-mock-tag">1st try free</div>
+          </div>
+          <div class="account-mock-row">
+            <div class="account-mock-ico" style="background:var(--scan-cyan);">🛰️</div>
+            <div class="account-mock-name">ScanOracle</div>
+            <div class="account-mock-tag">16+ free data keys</div>
+          </div>
+          <div class="account-mock-row">
+            <div class="account-mock-ico" style="background:var(--bolt-black);">⚡</div>
+            <div class="account-mock-name">Bolt</div>
+            <div class="account-mock-tag" style="background:#DBEAFE;color:#1D4ED8;">Always free</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <footer class="footer">
-  <div><b>Ghostroute⚡</b> · Five tools, one account</div>
-  <div>ScanOracle · Bolt · Petro · MedicNear · MechFind</div>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div style="margin-bottom:8px;"><b>Ghostroute⚡</b> · For everybody, one account</div>
+        <div class="footer-apps">
+          <a href="#everybody">BlackGrid</a>
+          <a href="#everybody">Petro</a>
+          <a href="#everybody">Cart</a>
+          <a href="#everybody">MedicNear</a>
+          <a href="#everybody">MechFind</a>
+          <a href="#security">ScanOracle</a>
+          <a href="#security">Bolt</a>
+        </div>
+      </div>
+      <div class="pay-badge">💳 Secured by Paystack</div>
+    </div>
+    <div class="footer-bottom">
+      <span>© Ghostroute. Built for power users 🐉</span>
+      <span>No hidden charges · Cancel anytime</span>
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -806,6 +830,37 @@ revEls.forEach(el => ro.observe(el));
     else{ root.removeAttribute('data-theme'); }
     try{ localStorage.setItem('gr-theme', next); }catch(e){}
     applyIcon(next);
+  });
+})();
+
+/* ── minimal 3D parallax for hero chips (mouse-driven, desktop only) ─── */
+(function(){
+  const hero3d = document.getElementById('hero3d');
+  if(!hero3d) return;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouch = window.matchMedia('(hover: none)').matches;
+  if(reduceMotion || isTouch) return;
+
+  const chips = hero3d.querySelectorAll('.float-chip');
+  const ghost = hero3d.querySelector('.hero-ghost');
+
+  hero3d.addEventListener('mousemove', function(e){
+    const rect = hero3d.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+
+    chips.forEach(function(chip, i){
+      const depth = 10 + (i % 3) * 6;
+      chip.style.transform = 'translate(' + (px * depth) + 'px,' + (py * depth) + 'px) rotateY(' + (px * 14) + 'deg) rotateX(' + (-py * 14) + 'deg)';
+    });
+    if(ghost){
+      ghost.style.transform = 'rotateY(' + (px * 10) + 'deg) rotateX(' + (-py * 10) + 'deg)';
+    }
+  });
+
+  hero3d.addEventListener('mouseleave', function(){
+    chips.forEach(function(chip){ chip.style.transform = ''; });
+    if(ghost){ ghost.style.transform = ''; }
   });
 })();
 </script>
