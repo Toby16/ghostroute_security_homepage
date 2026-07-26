@@ -1,0 +1,7 @@
+# Ghostroute — robots.txt
+# Place this file at the site root: https://www.ghostroute.icu/robots.txt
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.ghostroute.icu/sitemap.xml

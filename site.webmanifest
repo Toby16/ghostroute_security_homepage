@@ -1,0 +1,22 @@
+{
+  "name": "Ghostroute",
+  "short_name": "Ghostroute",
+  "description": "Ultra-powerful mini-apps for power users, all in one account.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#14131C",
+  "theme_color": "#14131C",
+  "icons": [
+    {
+      "src": "https://res.cloudinary.com/dtitx4alw/image/upload/v1781532568/vh1rsn83gnj5banbpfod.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "https://res.cloudinary.com/dtitx4alw/image/upload/v1781532568/vh1rsn83gnj5banbpfod.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
