@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Ghostroute — sitemap.xml
-     Place this file at the site root: https://www.ghostroute.icu/sitemap.xml
+     Place this file at the site root: https://home.ghostroute.icu/sitemap.xml
      Update <lastmod> whenever a page's content changes. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.ghostroute.icu/</loc>
+    <loc>https://home.ghostroute.icu/</loc>
     <lastmod>2026-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.ghostroute.icu/everybody.html</loc>
+    <loc>https://home.ghostroute.icu/everybody.html</loc>
     <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.ghostroute.icu/security.html</loc>
+    <loc>https://home.ghostroute.icu/security.html</loc>
     <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.ghostroute.icu/payment.html</loc>
+    <loc>https://home.ghostroute.icu/payment.html</loc>
     <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
