@@ -473,6 +473,28 @@ details[open] .faq-q .plus{transform:rotate(45deg);}
 .final-cta p{font-size:14.5px;color:rgba(255,255,255,0.78);max-width:440px;margin:0 0 22px;line-height:1.6;}
 .final-cta .btn{color:var(--ink);}
 
+/* ── PWA download banner (points to ghostroute.icu, not this homepage) ── */
+.download-banner{
+  display:flex;align-items:center;gap:14px;
+  background:rgba(255,255,255,0.08);
+  border:2px solid rgba(255,255,255,0.5);
+  border-radius:var(--radius-md);
+  padding:14px 18px;
+  margin-bottom:24px;
+  text-decoration:none;color:#fff;
+  transition:transform .12s ease, background .15s ease;
+}
+.download-banner:hover{transform:translateY(-2px);background:rgba(255,255,255,0.13);}
+.download-banner .db-icon{
+  flex-shrink:0;width:38px;height:38px;border-radius:11px;
+  background:rgba(255,255,255,0.16);border:2px solid rgba(255,255,255,0.5);
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+}
+.download-banner .db-body{flex:1;min-width:0;}
+.download-banner .db-title{font-family:'Fredoka',sans-serif;font-weight:600;font-size:13.5px;}
+.download-banner .db-sub{font-size:11.5px;color:rgba(255,255,255,0.7);margin-top:2px;}
+.download-banner .db-arrow{flex-shrink:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;}
+
 .signup-benefits{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
 .signup-benefits li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:rgba(255,255,255,0.9);}
 .signup-benefits .fchk{
@@ -800,6 +822,15 @@ details[open] .faq-q .plus{transform:rotate(45deg);}
         <li><span class="fchk">🌟</span> Prices shown before you ever search</li>
         <li><span class="fchk">💲</span> Secure top-ups and payments via Paystack</li>
       </ul>
+
+      <a href="https://ghostroute.icu/?install=1" class="download-banner" target="_blank" rel="noopener">
+  	<span class="db-icon">⚡</span>
+  	<span class="db-body">
+    	  <span class="db-title" style="display:block;">Install Ghostroute MegaApp</span>
+    	  <span class="db-sub">Get the web app on your phone or desktop — one tap, no app store.</span>
+  	</span>
+  	<span class="db-arrow">→</span>
+      </a>
 
       <div class="tool-eyebrow" style="color:var(--gr-purple-deep);"><span class="sw" style="background:var(--gr-purple);"></span> Paystack Modern Payment</div>
       <a href="https://www.ghostroute.icu" class="btn">● Create free account ●</a>
