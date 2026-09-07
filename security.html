@@ -383,6 +383,161 @@ a{color:inherit;} img{max-width:100%;display:block;}
   .nav-cta{gap:6px;}
   .nav-cta .btn-primary{padding:9px 14px;font-size:12px;}
 }
+
+/* ══════════════════════════════════════════════════════════════
+   GHOSTROUTE VPN — standalone dark section, own visual system.
+   Deliberately breaks from the sticker/Fredoka theme above: this
+   mirrors the actual Ghostroute VPN app's look (near-black, glass
+   cards, Space Grotesk + Inter) so the preview reads as real
+   product, not another homepage card.
+   ══════════════════════════════════════════════════════════════ */
+.vh-section{
+  position:relative;
+  background:#0a0a0b;
+  color:#e9eaed;
+  padding:84px 24px;
+  overflow:hidden;
+  border-top:var(--outline);
+  border-bottom:var(--outline);
+  isolation:isolate;
+}
+.vh-mist{
+  position:absolute;inset:-20% -10%;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(38% 32% at 22% 30%, rgba(201,206,218,0.10), transparent 70%),
+    radial-gradient(42% 36% at 78% 66%, rgba(255,255,255,0.06), transparent 72%);
+  filter:blur(40px);
+  animation:vhDrift 34s ease-in-out infinite;
+}
+@keyframes vhDrift{
+  0%,100%{transform:translate3d(0,0,0) scale(1);}
+  50%{transform:translate3d(3%,-4%,0) scale(1.06);}
+}
+.vh-grain{
+  position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.035;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode:overlay;
+}
+.vh-section .wrap{position:relative;z-index:1;}
+
+.vh-head{display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;}
+
+.vh-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:12.5px;
+  letter-spacing:.06em;text-transform:uppercase;color:#9a9ca4;
+  margin-bottom:18px;
+}
+.vh-new{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:10px;
+  letter-spacing:.04em;text-transform:uppercase;color:#0a0a0b;background:#e9eaed;
+  border-radius:100px;padding:3px 9px;
+}
+
+.vh-title{
+  font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-.01em;
+  font-size:clamp(30px,4vw,44px);line-height:1.08;margin-bottom:16px;color:#f4f4f6;
+}
+.vh-sub{
+  font-family:'Inter',sans-serif;font-size:15px;line-height:1.65;color:#9a9ca4;
+  max-width:460px;margin-bottom:26px;
+}
+
+.vh-features{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:32px;}
+.vh-features li{
+  display:flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;
+  font-size:13.5px;color:#c7c8ce;
+}
+.vh-fico{
+  flex-shrink:0;width:26px;height:26px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;font-size:13px;
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);
+}
+
+.vh-ctas{display:flex;gap:12px;flex-wrap:wrap;}
+.vh-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:'Inter',sans-serif;font-weight:600;font-size:13.5px;
+  padding:13px 22px;border-radius:100px;text-decoration:none;
+  transition:transform .15s ease, background-color .2s ease, border-color .2s ease;
+  white-space:nowrap;
+}
+.vh-btn-primary{background:#e9eaed;color:#0a0a0b;border:1px solid rgba(255,255,255,0.14);}
+.vh-btn-primary:hover{background:#ffffff;transform:translateY(-1px);}
+.vh-btn-ghost{background:transparent;color:#c7c8ce;border:1px solid rgba(255,255,255,0.16);}
+.vh-btn-ghost:hover{border-color:rgba(255,255,255,0.32);color:#f4f4f6;transform:translateY(-1px);}
+
+/* preview stack of real-product-style protocol cards */
+.vh-preview{position:relative;display:flex;flex-direction:column;gap:16px;}
+.vh-card{
+  position:relative;
+  padding:22px 22px 20px;border-radius:20px;
+  background:linear-gradient(165deg, rgba(255,255,255,0.07), rgba(255,255,255,0.015) 55%), rgba(255,255,255,0.025);
+  border:1px solid rgba(255,255,255,0.09);
+  animation:vhFloat 7s ease-in-out infinite;
+}
+.vh-card-alt{animation-delay:-3.4s;margin-left:22px;}
+@keyframes vhFloat{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-6px);}
+}
+.vh-card-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px;}
+.vh-card-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:17px;color:#f4f4f6;}
+.vh-card-price{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;color:#e9eaed;}
+.vh-card-price span{font-weight:400;font-size:10.5px;color:#7c7e86;}
+.vh-card-feats{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.vh-card-feats li{
+  font-family:'Inter',sans-serif;font-size:12px;color:#c7c8ce;
+  display:flex;align-items:center;gap:8px;
+}
+.vh-card-feats li::before{content:'';width:5px;height:5px;border-radius:50%;background:#7c7e86;flex-shrink:0;}
+.vh-card-btn{
+  text-align:center;padding:11px;border-radius:12px;
+  background:#e9eaed;color:#0a0a0b;font-family:'Inter',sans-serif;
+  font-weight:600;font-size:12px;margin-bottom:14px;
+}
+.vh-card-slots{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  font-family:'Inter',sans-serif;font-size:10.5px;color:#7c7e86;
+}
+.vh-slots-label{display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.04em;font-weight:600;}
+.vh-live-dot{width:6px;height:6px;border-radius:50%;background:#e9eaed;animation:vhPulse 2s ease-in-out infinite;}
+@keyframes vhPulse{
+  0%{box-shadow:0 0 0 0 rgba(233,234,237,.45);}
+  70%{box-shadow:0 0 0 5px rgba(233,234,237,0);}
+  100%{box-shadow:0 0 0 0 rgba(233,234,237,0);}
+}
+
+/* GhostRoute mark clone (CSS-only, no SVG, matches the app component) */
+.vh-mark{position:relative;display:inline-flex;align-items:center;justify-content:center;width:var(--vh-mark-size,32px);height:var(--vh-mark-size,32px);flex-shrink:0;box-sizing:border-box;}
+.vh-mark *{box-sizing:border-box;}
+.vh-mark-ring{position:absolute;inset:4%;border-radius:50%;border:1.5px dashed rgba(233,234,237,.4);animation:vhSpin 12s linear infinite;}
+.vh-mark-orbit{position:absolute;inset:4%;animation:vhSpin 3.4s linear infinite;}
+.vh-mark-orbit-dot{position:absolute;top:-3%;left:50%;width:15%;height:15%;margin-left:-7.5%;border-radius:50%;background:#e9eaed;box-shadow:0 0 6px rgba(233,234,237,.85);}
+.vh-mark-shield{position:relative;width:58%;height:58%;background:linear-gradient(160deg,#f4f4f6,#b9bac1);clip-path:polygon(50% 0%,95% 20%,95% 58%,50% 100%,5% 58%,5% 20%);box-shadow:0 2px 8px rgba(0,0,0,.4);}
+.vh-mark-eye{position:absolute;top:36%;width:15%;height:15%;border-radius:50%;background:#0a0a0b;}
+.vh-mark-eye.l{left:23%;}
+.vh-mark-eye.r{right:23%;}
+@keyframes vhSpin{to{transform:rotate(360deg);}}
+
+@media (prefers-reduced-motion:reduce){
+  .vh-mist{animation:none;}
+  .vh-card{animation:none;}
+  .vh-live-dot{animation:none;}
+  .vh-mark-ring,.vh-mark-orbit{animation:none;}
+}
+
+@media (max-width:900px){
+  .vh-head{grid-template-columns:1fr;gap:40px;}
+  .vh-preview{max-width:420px;}
+}
+@media (max-width:760px){
+  .vh-section{padding:60px 20px;}
+  .vh-ctas{flex-direction:column;align-items:stretch;}
+  .vh-btn{width:100%;}
+  .vh-card-alt{margin-left:0;}
+}
+
 </style>
 </head>
 <body>
@@ -403,6 +558,7 @@ a{color:inherit;} img{max-width:100%;display:block;}
 
 <div class="subnav">
   <div class="subnav-inner">
+    <a href="#vpn"><span class="sq" style="background:#e9eaed;">👻</span> Ghostroute VPN</a>
     <a href="#scanoracle"><span class="sq" style="background:var(--scan-cyan);">🛰️</span> ScanOracle</a>
     <a href="#bolt"><span class="sq" style="background:var(--bolt-black);">⚡</span> Bolt</a>
   </div>
@@ -415,6 +571,78 @@ a{color:inherit;} img{max-width:100%;display:block;}
   <h1>Ghostroute <span class="accent">Security.</span></h1>
   <p>Lightweight network tools designed to answer technical questions quickly and accurately — Whether you're investigating an IP address or measuring internet performance, every tool runs directly from your browser with no software to install.</p>
   <p class="page-hero-note">Intelligence · Unlimited Requests · Built for Power Users 🐉</p>
+</section>
+
+<!-- ── GHOSTROUTE VPN — standalone dark teaser, own visual system ── -->
+<section class="vh-section reveal" id="vpn">
+  <div class="vh-mist" aria-hidden="true"></div>
+  <div class="vh-grain" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="vh-head">
+      <div class="vh-copy">
+        <div class="vh-eyebrow">
+          <span class="vh-mark" style="--vh-mark-size:20px" aria-hidden="true">
+            <span class="vh-mark-ring"></span>
+            <span class="vh-mark-orbit"><span class="vh-mark-orbit-dot"></span></span>
+            <span class="vh-mark-shield"><span class="vh-mark-eye l"></span><span class="vh-mark-eye r"></span></span>
+          </span>
+          Ghostroute VPN
+          <span class="vh-new">New</span>
+        </div>
+
+        <h2 class="vh-title">Encrypt everything you send.</h2>
+        <p class="vh-sub">ScanOracle tells you what an IP is exposing. Ghostroute VPN makes sure yours isn't. WireGuard for speed, OpenVPN for obfuscation and enterprise-grade encryption — same account, same balance as every other security tool here.</p>
+
+        <ul class="vh-features">
+          <li><span class="vh-fico">⚡</span> WireGuard &amp; OpenVPN, both live right now</li>
+          <li><span class="vh-fico">📄</span> One-tap configuration file, no manual keys</li>
+          <li><span class="vh-fico">🛰️</span> Step-by-step setup guides for every device</li>
+          <li><span class="vh-fico">📊</span> Live slot availability before you pay</li>
+          <li><span class="vh-fico">🔁</span> Pay per day. Auto-renew is optional, not default</li>
+        </ul>
+
+        <div class="vh-ctas">
+          <a href="https://www.ghostroute.icu/ghostroutevpn/protocols" class="vh-btn vh-btn-primary">Explore protocols →</a>
+          <a href="https://www.ghostroute.icu/ghostroutevpn/how-to-use" class="vh-btn vh-btn-ghost">See setup guides</a>
+        </div>
+      </div>
+
+      <div class="vh-preview" aria-hidden="true">
+        <div class="vh-card">
+          <div class="vh-card-head">
+            <span class="vh-card-name">wireguard</span>
+            <span class="vh-card-price">$0.4<span>/day</span></span>
+          </div>
+          <ul class="vh-card-feats">
+            <li>fastest connection</li>
+            <li>ad-blocking</li>
+            <li>firewall protection</li>
+          </ul>
+          <div class="vh-card-btn">select to continue</div>
+          <div class="vh-card-slots">
+            <span class="vh-slots-label"><span class="vh-live-dot"></span>live spaces</span>
+            <span>3 / 64,750 used</span>
+          </div>
+        </div>
+        <div class="vh-card vh-card-alt">
+          <div class="vh-card-head">
+            <span class="vh-card-name">openvpn</span>
+            <span class="vh-card-price">$3<span>/week</span></span>
+          </div>
+          <ul class="vh-card-feats">
+            <li>anonymity</li>
+            <li>obfuscation</li>
+            <li>business &amp; enterprise</li>
+          </ul>
+          <div class="vh-card-btn">select to continue</div>
+          <div class="vh-card-slots">
+            <span class="vh-slots-label"><span class="vh-live-dot"></span>live spaces</span>
+            <span>4 / 10,000 used</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ── GETTING STARTED (shared) ───────────────────── -->
